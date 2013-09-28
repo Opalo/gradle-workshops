@@ -1,0 +1,36 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile 	gradleApi()
+	testCompile	'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Write two tasks named 'helloDefault' and 'helloCustom' both of type 'Greeting' with a configurable greeting text that is printed to standard output
+
+// Your solution goes below
+
+task helloDefault(type: Greeting)
+
+task helloCustom(type: Greeting) {
+    greeting = 'Hello from me'
+}
+
+class Greeting extends DefaultTask {
+
+    String greeting = 'Hello from Gradle'
+
+    @TaskAction
+    void run() {
+        println greeting
+    }
+}
+
+
+
