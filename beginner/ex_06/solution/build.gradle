@@ -1,0 +1,28 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Define 'upload' task. Use gradle graph to verify if it has 'upload' task after evaluation and if project has 'uploadUrl' property.
+// If no throw GradleException with message 'uploadUrl must be set to execute upload!'
+//
+//
+
+// Your solution goes below
+
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(':upload') && !project.hasProperty('uploadUrl')) {
+        throw new GradleException('uploadUrl must be set to execute upload!')
+    }
+}
+
+task upload
