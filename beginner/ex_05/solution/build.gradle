@@ -1,0 +1,29 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile 	gradleApi()
+	testCompile	'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Declare two tasks: 'updateVersion' and 'updateAuthor'
+// Task 'updateVersion' is enabled when an 'app_version' (number) property was passed as a parameter while running gradle
+// Task 'updateAuthor' runs when 'app_author' system property is set and is not empty
+
+// Your solution goes below
+task updateVersion
+updateVersion.enabled = project.hasProperty('app_version') && project.app_version?.matches('\\d+')
+
+task updateAuthor
+updateAuthor.onlyIf {
+    def author = System.properties['app_author']
+    author && author?.length() > 0
+}
