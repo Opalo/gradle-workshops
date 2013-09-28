@@ -50,5 +50,4 @@ class SolutionSpec extends Specification {
         def buildLauncher = pc.newBuild()
         buildLauncher.forTasks(task).run()
     }
-
 }
