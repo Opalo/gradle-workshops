@@ -1,0 +1,20 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Create plugins dir with info-plugin.gradle file. Define an 'info' task in this plugin.
+// Then apply 'info-plugin.gradle' file to this build script
+
+// Ypur solution goes below
+
+apply from: 'plugins/info-plugin.gradle'
