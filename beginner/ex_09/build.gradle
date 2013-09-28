@@ -20,19 +20,3 @@ dependencies {
 
 // Your solution goes below
 
-contentSpec = copySpec {
-    from('content') {
-        include '**/*.txt'
-        include '**/*.xml'
-    }
-}
-
-task zip(type: Zip) {
-    with contentSpec
-    archiveName 'content.zip'
-}
-
-task unzip(type: Copy, dependsOn: zip) {
-    from zipTree(zip.archivePath)
-    into "$buildDir/unpack"
-}

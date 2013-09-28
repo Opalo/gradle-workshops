@@ -1,6 +1,8 @@
 apply plugin: 'idea'
 apply plugin: 'groovy'
 
+buildDir = 'different'
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -12,9 +14,25 @@ dependencies {
 }
 
 // Specification
-// Create plugins dir with info-plugin.gradle file. Define an 'info' task in this plugin.
-// Then apply 'info-plugin.gradle' file to this build script
+// Create two tasks 'zip' and 'unzip'
+// - 'zip' tasks zips all *.txt and *.xml files into file named content.zip
+// - 'unzip' task unzips 'conten.zip' file and stores the content under build directory in subfolder 'unpack'
 
-// Ypur solution goes below
+// Your solution goes below
 
-apply from: 'plugins/info-plugin.gradle'
+contentSpec = copySpec {
+    from('content') {
+        include '**/*.txt'
+        include '**/*.xml'
+    }
+}
+
+task zip(type: Zip) {
+    with contentSpec
+    archiveName 'content.zip'
+}
+
+task unzip(type: Copy, dependsOn: zip) {
+    from zipTree(zip.archivePath)
+    into "$buildDir/unpack"
+}
