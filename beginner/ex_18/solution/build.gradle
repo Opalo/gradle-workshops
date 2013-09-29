@@ -1,0 +1,47 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Create extension of type 'GoogleDependencies' and with name 'googleDependencies'
+// - create it with project instance
+// - add two methods to this extension 'guice' and 'guava' with single String argument named 'version' and default value '3.0' and '15.0' respectively
+// - both methods should add dependency with passed version to 'compile' configuration
+// - with created extension add guice '1.0' dependency and guava '11.0' dependency
+
+// Your solution goes below
+
+project.extensions.create('googleDependencies', GoogleDependencies, project)
+
+googleDependencies {
+    guice '1.0'
+    guava '11.0'
+}
+
+class GoogleDependencies {
+    final Project project
+
+    GoogleDependencies(Project project) {
+        this.project = project
+    }
+
+    void guice(final String version = '3.0') {
+        project.dependencies {
+           compile "com.google.inject:guice:$version"
+        }
+    }
+
+    void guava(final String version = '15.0')  {
+        project.dependencies {
+            compile "com.google.guava:guava:$version"
+        }
+    }
+}
