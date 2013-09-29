@@ -1,0 +1,18 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Apply plugin 'ex-17' and modify sample task not to throw NPE
+
+// Your solution goes below
+
+apply plugin: 'ex-17'
