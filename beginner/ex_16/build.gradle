@@ -1,0 +1,20 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Define a task rule that will dynamically create 'ping<ENV>' task that will ping appropriate env. Envs are listed below
+// - rule description is: 'Pattern: ping<ID>, where <ID> is one of [DEV, TST, UAT, PROD]'
+// - task should print to standard output "Pinging <ENV>"
+// Define a task 'pingAll' that will ping all environments
+
+// Your solution goes below
+def environments = ['DEV', 'TST', 'UAT', 'PROD']
