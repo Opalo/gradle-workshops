@@ -1,0 +1,21 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+buildDir = 'different'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Define task:
+// - 'countSize' of type 'Size' which has an input directory 'content' and output file 'size.txt' located in buildDir
+// - 'countSize' should sum the size of all *.txt files in it's input directory
+
+// Your solution goes below
+
