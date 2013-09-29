@@ -1,0 +1,20 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Add custom configuration named 'wsConf'
+// Define a 'org.apache.httpcomponents:httpclient:4.0.3' dependency for this configuration
+// Define two tasks:
+// - 'showDeps' that will print to standard output all dependencies of 'wsConf' configuration
+// - 'copyDeps' that will copy all dependencies from 'wsConf' configuration to 'deps' subfolder of build dir
+
+// Your solution goes below
