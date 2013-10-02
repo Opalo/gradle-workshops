@@ -1,0 +1,18 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile 	gradleApi()
+	testCompile	'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Create a task with name 'hello' that will print "Hello <username>" to the standard output
+
+// Your solution goes below
+

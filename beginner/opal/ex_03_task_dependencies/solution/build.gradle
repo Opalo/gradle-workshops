@@ -1,0 +1,43 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Modify the following build script to generate output below when 'date' task is run
+// Task 'date' should depend on 'hello' task
+//
+// 'top level 1'
+// 'date configuration'
+// 'Hello World'
+// <date in format dd-MM-yyyy>
+// 'top level 2'
+
+// Your solution goes below
+
+// Your solution goes below
+
+println 'top level 1'
+
+task hello << {
+    println 'Hello World'
+}
+
+task date(dependsOn: hello) {
+    println 'date configuration'
+    doFirst {
+        println new SimpleDateFormat('dd-MM-yyyy').format(new Date())
+    }
+}
+
+println 'top level 2'
