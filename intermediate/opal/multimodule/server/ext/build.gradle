@@ -1,1 +1,5 @@
-apply plugin: 'war'
+httpPort = 8082
+stopPort = 8083
+stopKey = 'stop'
+
+//http://stackoverflow.com/questions/5392875/gradle-replace-text-in-jsp-using-filter

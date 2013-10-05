@@ -1,3 +1,121 @@
 allprojects {
     apply plugin: 'idea'
+    group = 'org.warsjawa.gradleWS'
+    version = '0.1'
+    def jdk = '1.7'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    idea {
+        project {
+            jdkName = jdk
+            languageLevel = jdk
+        }
+    }
+}
+
+project.ext {
+    profiles = [
+            local_ext: [
+                    backend: 'http://localhost:8082/ext',
+                    client_name: 'Your Credit EXT (local)'
+            ],
+            local_int: [
+                    backend: 'http://localhost:8084/int',
+                    client_name: 'Your Credit INT (local)',
+                    ext_host: 'http://localhost:8082/ext'
+            ],
+            test_ext: [
+                    backend: 'http://ext.provider.com/ext',
+                    client_name: 'Your Credit EXT (test)'
+            ],
+            test_int: [
+                    backend: 'http://test.bank.com/int',
+                    client_name: 'Your Credit INT (test)',
+                    ext_host: 'http://ext.provider.com/ext'
+            ]
+    ]
+}
+
+['client', 'int', 'ext'].each { n ->
+    subprojects.find { it.name == n }.plugins.apply('war')
+}
+
+subprojects.findAll { it.path.contains('server') }.each {
+    it.plugins.apply 'groovy'
+
+    it.dependencies {
+        compile localGroovy()
+
+        compile 'com.google.inject:guice:3.0'
+        compile 'com.google.guava:guava:15.0'
+
+        testCompile 'org.spockframework:spock-guice:0.7-groovy-1.8'
+    }
+}
+
+['int', 'ext', 'client'].each { n ->
+    def p = subprojects.find { it.name == n }
+    configure(p) {
+        apply plugin: 'jetty'
+    }
+}
+
+['int', 'ext'].each { n ->
+    def p = subprojects.find { it.name == n }
+    configure(p) {
+        dependencies {
+            compile project(':server:commons')
+
+            compile 'com.google.inject.extensions:guice-servlet:3.0'
+            compile 'commons-configuration:commons-configuration:1.9'
+
+            compile 'org.slf4j:slf4j-api:1.7.5'
+            compile 'ch.qos.logback:logback-classic:1.0.13'
+            compile 'ch.qos.logback:logback-core:1.0.13'
+        }
+    }
+}
+
+//TODO rule
+task jettyRunExt << {
+    runJetty('ext', ' 8082')
+}
+
+jettyRunExt.dependsOn(':client:war')
+jettyRunExt.dependsOn(':server:ext:war')
+
+task jettyRunInt << {
+    runJetty('int', '8084')
+}
+
+jettyRunInt.dependsOn(':client:war')
+jettyRunInt.dependsOn(':server:int:war')
+
+
+def runJetty(env, port) {
+    def server_war = "server/$env/build/libs/$env-${version}.war"
+    def client_war = "client/build/libs/client-${version}.war"
+
+    def jetty_path = ' jetty-runner/jetty-runner-8.1.13.v20130916.jar '
+    def jetty_cmd = new StringBuilder()
+    jetty_cmd.
+            append('java ').
+            append(' -jar ').
+            append(jetty_path).
+            append(' --port ').append("$port ").
+            append(' --path ').append("$env ").
+            append(server_war).
+            append(' --path ').append('client ').
+            append(client_war)
+
+    println jetty_cmd.toString()
+
+    def jetty_proc = jetty_cmd.toString().execute()
+    jetty_proc.in.eachLine { line -> println "IN: ${line}" }
+    jetty_proc.err.eachLine { line -> println "ERROR: ${line}" }
+    jetty_proc.waitFor()
 }

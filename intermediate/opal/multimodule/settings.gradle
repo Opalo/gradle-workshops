@@ -1,3 +1,4 @@
+include 'ear'
 include 'client'
 include 'server:int'
 include 'server:ext'
