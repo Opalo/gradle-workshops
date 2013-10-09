@@ -3,3 +3,7 @@ include 'client'
 include 'server:int'
 include 'server:ext'
 include 'server:commons'
+
+//rootProject.children.each {
+//    it.buildFileName = it.name + '.gradle'
+//}
