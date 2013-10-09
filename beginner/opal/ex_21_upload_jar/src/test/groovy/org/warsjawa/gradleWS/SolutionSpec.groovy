@@ -28,7 +28,7 @@ class SolutionSpec extends Specification {
         runGradle(projectConnection, 'uploadArchives')
 
         then:
-        def jar = new File(repos, 'ex_21_upload_jar-unspecified.jar')
+        def jar = new File(repos, 'ex_21_upload_jar-3.0.jar')
         jar.exists()
         jar.isFile()
         jar.size() > 2900

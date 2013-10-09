@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'idea'
+apply plugin: 'maven'
 
 repositories {
     mavenCentral()
@@ -11,16 +12,20 @@ dependencies {
 }
 
 // Specification
-// Use UploadRule (run gradle tasks for details) to install result jar file under 'repos' flat dir
+// Use UploadRule (run gradle tasks for details) to upload result jar file under 'repos' maven repo - 'repos' is located
+// at the same level as this script file
 // - 'repos' directory should be located at the same level as this build script
 // - resulting jar file should have '3.0' version
+// - resulting group should be 'org.warsjawa'
+// - resulting name should be 'simple'
 
+group = 'org.warsjawa'
 version = '3.0'
 
 uploadArchives {
     repositories {
-        flatDir {
-            dirs 'repos'
+        mavenDeployer {
+            repository(url: file('repos').toURL())
         }
     }
 }
