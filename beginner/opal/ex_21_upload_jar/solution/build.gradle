@@ -1,0 +1,24 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+}
+
+// Specification
+// Use UploadRule (run gradle tasks for details) to install result jar file under 'repos' flat dir
+// - 'repos' directory should be located at the same level as this build script
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs 'repos'
+        }
+    }
+}
+
