@@ -15,6 +15,6 @@ dependencies {
 // Create plugins dir with info-plugin.gradle file. Define an 'info' task in this plugin.
 // Then apply 'info-plugin.gradle' file to this build script
 
-// Ypur solution goes below
+// Your solution goes below
 
 apply from: 'plugins/info-plugin.gradle'
