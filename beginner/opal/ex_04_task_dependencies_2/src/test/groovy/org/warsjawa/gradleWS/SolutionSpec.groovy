@@ -37,10 +37,14 @@ class SolutionSpec extends Specification {
         project.evaluate()
 
         then:
-        project.tasks.findByName('hello')
-        project.tasks.findByName('user')
-        project.tasks.findByName('welcome')
-        project.tasks['welcome'].dependsOn.contains([project.tasks['hello'], project.tasks['user']])
+        def hello = project.tasks.findByName('hello')
+        def user = project.tasks.findByName('user')
+        def welcome = project.tasks.findByName('welcome')
+        hello
+        user
+        welcome
+        welcome.dependsOn.flatten().containsAll(hello, user)
+        user.mustRunAfter.getDependencies(user).find { it.name == hello.name }
     }
 
     def runGradle(ProjectConnection pc, String... tasks) {

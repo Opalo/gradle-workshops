@@ -30,6 +30,8 @@ task user << {
     println System.properties['user.name']
 }
 
+user.mustRunAfter hello
+
 task welcome(dependsOn: [hello, user]) << {
     println new SimpleDateFormat('dd-MM-yyyy').format(new Date())
 }
