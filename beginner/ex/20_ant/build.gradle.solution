@@ -1,0 +1,18 @@
+/*
+ * INSTRUCTION:
+ * ===========
+ * 1. Define task zip that create archive.zip file from toZip directory excluding all *.secret files
+ * 2. Count archive.zip.MD5
+ */
+
+// ------------ START EDITING HERE ----------------------
+task zip << {
+    ant.zip(destfile: 'archive.zip') {
+        fileset(dir: 'toZip') {
+            exclude(name: '**.secret')
+        }
+    }
+    ant.checksum(file: 'archive.zip')
+}
+// ------------ STOP EDITING HERE  ----------------------
+

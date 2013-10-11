@@ -1,0 +1,18 @@
+/*
+ * INSTRUCTION:
+ * ===========
+ * 1. Create task 'run' that calls pl.warsjawa.Hello.main()
+ */
+
+// ------------ START EDITING HERE ----------------------
+apply plugin: 'java'
+
+task run(type: JavaExec) {
+    main = 'pl.warsjawa.Hello'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// ------------ STOP EDITING HERE  ----------------------
+
+apply from: 'verification.gradle'
+

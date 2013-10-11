@@ -1,0 +1,23 @@
+/*
+ * INSTRUCTION:
+ * ===========
+ * 1. Use checkstyle, pmd, findbugs to analyse project
+ */
+
+// ------------ START EDITING HERE ----------------------
+
+apply plugin: 'java'
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+}
+// ------------ STOP EDITING HERE  ----------------------
+
+

@@ -1,0 +1,20 @@
+/*
+ * INSTRUCTION:
+ * ===========
+ * 1. Add three separate actions to task koanTask. 
+ *    Each action should call project.registerInvocation('action N') where N is in [1, 2, 3]
+ */
+ 
+ext.messages = []
+ext.registerInvocation = { String message -> messages.add(message) }
+
+task koanTask
+
+// ------------ START EDITING HERE ----------------------
+
+// ------------ STOP EDITING HERE  ----------------------
+
+task verify(dependsOn: koanTask) << {
+    assert koanTask.actions.size() == 3
+    assert messages == ['action 1', 'action 2', 'action 3']
+}
