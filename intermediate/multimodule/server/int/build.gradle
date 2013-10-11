@@ -1,4 +1,3 @@
-import org.apache.tools.ant.filters.ReplaceTokens
 
 dependencies {
 
@@ -10,12 +9,3 @@ dependencies {
 httpPort = 8084
 stopPort = 8085
 stopKey = 'stop'
-
-processResources {
-
-    def profile = project.properties['profile'] ? project.profile : 'local_int'
-
-    from('src/main/resources') {
-        filter(ReplaceTokens, tokens: profiles[profile])
-    }
-}

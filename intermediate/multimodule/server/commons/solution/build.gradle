@@ -1,0 +1,13 @@
+dependencies {
+    def jerseyVersion = '1.17.1'
+
+    compile "com.sun.jersey:jersey-core:$jerseyVersion"
+    compile "com.sun.jersey:jersey-server:$jerseyVersion"
+    compile "com.sun.jersey:jersey-servlet:$jerseyVersion"
+    compile "com.sun.jersey:jersey-client:$jerseyVersion"
+    compile "com.sun.jersey:jersey-json:$jerseyVersion"
+    compile "com.sun.jersey.contribs:jersey-guice:$jerseyVersion"
+
+    compile 'javax.ws.rs:jsr311-api:1.1.1'
+    compile 'javax.servlet:servlet-api:2.5'
+}
