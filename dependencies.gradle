@@ -1,0 +1,35 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()    
+}
+
+dependencies {
+    compile	'org.spockframework:spock-core:0.7-groovy-1.8'
+    compile 'junit:junit:4.11'
+    compile 'org.gebish:geb-spock:0.9.1'
+    compile 'org.spockframework:spock-core:0.7-groovy-1.8'
+    compile "org.seleniumhq.selenium:selenium-firefox-driver:2.26.0"
+    compile "org.seleniumhq.selenium:selenium-chrome-driver:2.26.0"
+    compile "com.sun.jersey:jersey-core:1.17.1"
+    compile "com.sun.jersey:jersey-server:1.17.1"
+    compile "com.sun.jersey:jersey-servlet:1.17.1"
+    compile "com.sun.jersey:jersey-client:1.17.1"
+    compile "com.sun.jersey:jersey-json:1.17.1"
+    compile "com.sun.jersey.contribs:jersey-guice:1.17.1"
+    compile 'javax.ws.rs:jsr311-api:1.1.1'
+    compile 'javax.servlet:servlet-api:2.5'
+    compile 'org.mapdb:mapdb:0.9.6'
+    compile 'org.quartz-scheduler:quartz:2.+'
+    compile 'org.apache.httpcomponents:httpclient:4.3'
+    compile 'org.mapdb:mapdb:0.9.6'
+    compile 'org.quartz-scheduler:quartz:2.+'
+    compile 'org.apache.httpcomponents:httpclient:4.3'
+    compile 'com.google.inject:guice:3.0'
+    compile 'com.google.guava:guava:15.0'
+    compile 'com.google.inject.extensions:guice-servlet:3.0'
+    compile 'commons-configuration:commons-configuration:1.9'
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'ch.qos.logback:logback-classic:1.0.13'
+    compile 'ch.qos.logback:logback-core:1.0.13'
+}
